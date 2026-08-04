@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="./doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+@media print{table{break-inside:auto}thead{break-inside:avoid}}
+.print-only{display:none}
+@media print{.print-only{display:block}.screen-only{display:none}}
+a{color:#1C2A57;text-decoration:none}a:hover{text-decoration:underline}
+[data-dev="tablet"] .r-stack{gap:24px!important}
+[data-dev="tablet"] .r-stack .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="tablet"] .r-stack .r-stack > div{text-align:left!important}
+[data-dev="tablet"] .r-full{max-width:100%!important}
+[data-dev="mobile"] .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="mobile"] .r-stack > div{text-align:left!important}
+[data-dev="mobile"] .r-stack .justify-end{justify-content:flex-start!important}
+[data-dev="mobile"] .r-stack .r-titlerow{flex-direction:row-reverse!important;justify-content:flex-end!important}
+[data-dev="mobile"] .r-full{width:100%!important;max-width:100%!important}
+[data-dev="mobile"] .r-wfull{width:100%!important;white-space:nowrap!important}
+[data-dev="mobile"] .r-hide{display:none!important}
+[data-dev="mobile"] .r-show{display:block!important}
+[data-dev="mobile"] .r-age{grid-template-columns:1fr 1fr!important}
+[data-dev="mobile"].r-stack{flex-direction:column!important;align-items:flex-start!important;gap:2px!important}
+[data-dev="mobile"] .r-stack.text-\[9px\]{gap:2px!important}
+[data-dev="tablet"].r-stack{gap:12px!important}
+</style>
+</helmet>
+<doc-page margin="{{ pageMargin }}" width="{{ pageW }}">
+<div class="relative font-sans text-[13px] leading-relaxed" data-dev="{{ dev }}" data-screen-label="Receipt" style="color:var(--ink);--accent:{{accent}};--ink:{{ink}};--mut:{{muted}};--ln:{{line}};--soft:{{soft}};--softbd:{{softBd}};--stbg:{{stBg}};--stbd:{{stBd}};--stfg:{{stFg}};--stdot:{{stDot}};--cy:{{cellY}};--smt:{{secMt}};--due:{{dueColor}}">
+<sc-if value="{{ watermark }}" hint-placeholder-val="{{ false }}">
+  <div class="pointer-events-none absolute inset-x-0 top-[240px] z-10 flex justify-center" style="opacity:0.07">
+    <div class="select-none text-[120px] font-black uppercase tracking-[0.18em]" style="color:var(--accent);transform:rotate(-16deg)">{{ wmText }}</div>
+  </div>
+</sc-if>
+<sc-if value="{{ hlA }}" hint-placeholder-val="{{ true }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div>
+      <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+      <div class="mt-4 text-[15px] font-semibold" style="color:var(--ink)">Example Studio</div>
+      <div class="mt-1 text-[11.5px] leading-relaxed" style="color:var(--mut)">100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">{{ docTitle }}</div>
+      </div>
+      <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ rcptNo }}</div>
+      <div class="mt-3 space-y-0.5 text-[11.5px]">
+        <div><span style="color:var(--mut)">{{ dateLabel }}&nbsp;&nbsp;</span><span style="color:var(--ink)">{{ paidDate }}</span></div>
+        <div><span style="color:var(--mut)">Method&nbsp;&nbsp;</span><span class="font-medium" style="color:var(--due)">{{ methodShort }}</span></div>
+      </div>
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlB }}" hint-placeholder-val="{{ false }}">
+  <header class="flex flex-col items-center text-center">
+    <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+    <div class="mt-4 flex items-center gap-3">
+      <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">{{ docTitle }}</div>
+      <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+    </div>
+    <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ rcptNo }}</div>
+    <div class="mt-2 text-[11.5px]" style="color:var(--mut)">{{ dateLabel }} {{ paidDate }} · <span class="font-medium" style="color:var(--due)">{{ methodShort }}</span></div>
+    <div class="mt-3 text-[11.5px]" style="color:var(--mut)">Example Studio · 100 Example Street, Laval, QC H7T-3B5 · billing@example.com</div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlC }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div>
+      <div class="text-[19px] font-semibold tracking-tight" style="color:var(--accent)">Example Studio</div>
+      <div class="mt-1.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Tradename for Idea Crafters LLC<br>100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">{{ docTitle }}</div>
+      </div>
+      <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ rcptNo }}</div>
+      <div class="mt-3 space-y-0.5 text-[11.5px]">
+        <div><span style="color:var(--mut)">{{ dateLabel }}&nbsp;&nbsp;</span><span style="color:var(--ink)">{{ paidDate }}</span></div>
+        <div><span style="color:var(--mut)">Method&nbsp;&nbsp;</span><span class="font-medium" style="color:var(--due)">{{ methodShort }}</span></div>
+      </div>
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlD }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-end justify-between border-b pb-4" style="border-color:var(--ln)">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">{{ docTitle }}</div>
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+      </div>
+      <div class="mt-0.5 font-mono text-[12.5px]" style="color:var(--ink)">{{ rcptNo }}</div>
+    </div>
+    <div class="text-right text-[11.5px]">
+      <div><span style="color:var(--mut)">{{ dateLabel }}&nbsp;&nbsp;</span><span style="color:var(--ink)">{{ paidDate }}</span></div>
+      <div><span style="color:var(--mut)">Method&nbsp;&nbsp;</span><span class="font-medium" style="color:var(--due)">{{ methodShort }}</span></div>
+    </div>
+  </header>
+</sc-if>
+<section class="r-stack flex items-start justify-between gap-10" style="margin-top:var(--smt)">
+  <div class="r-stack flex gap-12">
+    <div class="max-w-[300px]">
+      <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">{{ partyLabel }}</div>
+      <div class="mt-1.5 text-[13px] font-semibold" style="color:var(--ink)">Acme Corporation</div>
+      <div class="mt-0.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Attn: Alex Doe<br>405 avenue Ogilvy<br>Montréal, QC, H3N 1M3<br>finance@acme.example · +1 (555) 010-0200</div>
+    </div>
+  </div>
+  <div class="r-full w-[240px] flex-none rounded-lg border px-4 py-3" style="border-color:var(--ln)">
+    <div class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-[11px]">
+      <span style="color:var(--mut)">Receipt no.</span><span class="text-right font-mono" style="color:var(--ink)">{{ rcptNo }}</span>
+      <span style="color:var(--mut)">Applied to</span><span class="text-right font-mono" style="color:var(--ink)">3 invoices</span>
+      <span style="color:var(--mut)">Statement</span><span class="text-right font-mono" style="color:var(--ink)">ST-ACME-2026-07</span>
+      <span style="color:var(--mut)">Currency</span><span class="text-right" style="color:var(--ink)">CAD</span>
+    </div>
+  </div>
+</section>
+<section class="r-stack flex items-stretch gap-4" style="margin-top:var(--smt);break-inside:avoid">
+  <div class="r-full flex flex-1 flex-col justify-center rounded-lg border px-5 py-4" style="border-color:var(--softbd);background:var(--soft)">
+    <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--accent)">{{ heroLabel }}</div>
+    <div class="mt-0.5 text-[30px] font-semibold tabular-nums leading-none" style="color:var(--accent)">{{ balance }}</div>
+    <div class="mt-1.5 text-[11.5px]" style="color:var(--mut)">{{ heroCap }}</div>
+  </div>
+  <div class="r-full w-[260px] flex-none rounded-lg border px-4 py-3" style="border-color:var(--ln)">
+    <div class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-[11px]">
+      <div class="col-span-2 mb-1 text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Payment details</div>
+      <span style="color:var(--mut)">Sent to</span><span class="text-right font-mono text-[10.5px]" style="color:var(--ink)">{{ payInstrument }}</span>
+      <span style="color:var(--mut)">GST</span><span class="text-right font-mono text-[10.5px]" style="color:var(--ink)">000000000 RT0001</span>
+      <span style="color:var(--mut)">QST</span><span class="text-right font-mono text-[10.5px]" style="color:var(--ink)">0000000000 TQ0001</span>
+    </div>
+  </div>
+</section>
+<table class="w-full border-collapse" style="margin-top:var(--smt)">
+  <thead>
+    <tr class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">
+      <th class="w-8 text-left font-semibold" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:2px solid var(--accent)">#</th>
+      <th class="text-left font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Invoice settled</th>
+      <th class="r-hide w-32 text-right font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Issued</th>
+      <th class="w-32 text-right font-semibold" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:2px solid var(--accent)">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <sc-for list="{{ rows }}" as="row" hint-placeholder-count="3">
+      <tr style="background:{{ row.bg }};break-inside:avoid">
+        <td class="align-top text-[11px] tabular-nums" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:1px solid var(--ln);color:var(--mut)">{{ row.n }}</td>
+        <td class="align-top" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln)">
+          <div class="font-mono text-[12.5px] font-medium" style="color:var(--ink)">{{ row.ref }} <span class="font-sans text-[10.5px] font-normal" style="color:var(--mut)">{{ row.settled }}</span></div>
+        </td>
+        <td class="r-hide align-top text-right text-[12.5px] tabular-nums" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.issued }}</td>
+        <td class="align-top text-right text-[12.5px] font-medium tabular-nums" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.amount }}</td>
+      </tr>
+    </sc-for>
+  </tbody>
+</table>
+<section class="flex justify-end" style="margin-top:14px;break-inside:avoid">
+  <div class="r-full w-[320px]">
+    <sc-for list="{{ totalRows }}" as="r" hint-placeholder-count="3">
+      <div class="flex items-baseline justify-between py-1.5 text-[12px] {{ r.bt }}" style="border-color:var(--ln)">
+        <span class="{{ r.lblCls }}" style="color:{{ r.lblFg }}">{{ r.label }}</span>
+        <span class="tabular-nums {{ r.valCls }}" style="color:var(--ink)">{{ r.value }}</span>
+      </div>
+    </sc-for>
+    <div class="mt-3 flex items-center justify-between rounded-md border px-4 py-2.5" style="background:var(--soft);border-color:var(--softbd)">
+      <span class="text-[11px] font-bold uppercase tracking-[0.1em]" style="color:var(--accent)">{{ balanceLabel }}</span>
+      <span class="text-[19px] font-semibold tabular-nums" style="color:var(--accent)">{{ balance }}</span>
+    </div>
+  </div>
+</section>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+  <section style="margin-top:var(--smt)">
+    <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Notes</div>
+    <p class="mt-1.5 max-w-[560px] text-[12px] leading-relaxed" style="color:var(--ink)">{{ notesText }}</p>
+  </section>
+</sc-if>
+
+</div>
+<div slot="footer" class="r-stack flex items-center justify-between gap-1 font-sans text-[9px] tracking-wide" data-dev="{{ dev }}" style="color:#6b7280;padding-top:16px">
+  <span>Example Studio · GST 000000000RT0001 QST 0000000000TQ0001</span>
+  <span>example.com · billing@example.com · {{ rcptNo }}</span>
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;pageNumbers&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;none&quot;, &quot;bottom-right&quot;, &quot;bottom-center&quot;, &quot;bottom-left&quot;], &quot;default&quot;: &quot;bottom-right&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Page numbers&quot;},
+  &quot;pageNumberFormat&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;page-x-of-y&quot;, &quot;x-of-y&quot;, &quot;x-slash-y&quot;], &quot;default&quot;: &quot;page-x-of-y&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Page numbers&quot;},
+  &quot;paper&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;a4&quot;, &quot;letter&quot;], &quot;default&quot;: &quot;a4&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Page numbers&quot;},
+  &quot;device&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;desktop&quot;, &quot;tablet&quot;, &quot;mobile&quot;], &quot;default&quot;: &quot;desktop&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Layout&quot;},
+  &quot;headerLayout&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;logo-left&quot;, &quot;centered&quot;, &quot;company-left&quot;, &quot;minimal&quot;], &quot;default&quot;: &quot;logo-left&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Layout&quot;},
+  &quot;density&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;compact&quot;, &quot;standard&quot;, &quot;comfortable&quot;], &quot;default&quot;: &quot;standard&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Layout&quot;},
+  &quot;zebra&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot;},
+  &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;branded&quot;, &quot;monochrome&quot;, &quot;grayscale&quot;], &quot;default&quot;: &quot;branded&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Theme&quot;},
+  &quot;accentColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;options&quot;: [&quot;#1C2A57&quot;, &quot;#2F80E4&quot;, &quot;#0E7490&quot;, &quot;#B45309&quot;], &quot;default&quot;: &quot;#1C2A57&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Theme&quot;},
+  &quot;watermark&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Theme&quot;},
+  &quot;showNotes&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot;}
+}">
+class Component extends DCLogic {
+  componentDidMount() {
+    import('./page-numbers.js').then(m => {
+      this._pnCleanup = m.attachPageNumbers(() => {
+        const dp = document.querySelector('doc-page');
+        const p = this.props;
+        const dev = p.device ?? 'desktop';
+        const fmtMap = { 'page-x-of-y': 'Page {n} of {N}', 'x-of-y': '{n} of {N}', 'x-slash-y': '{n} / {N}' };
+        return {
+          root: dp && dp.querySelector(':scope > div'),
+          footer: dp && dp.querySelector('[slot="footer"]'),
+          position: p.pageNumbers ?? 'bottom-right',
+          format: fmtMap[p.pageNumberFormat ?? 'page-x-of-y'] || fmtMap['page-x-of-y'],
+          paper: p.paper ?? 'a4',
+          marginPx: dev === 'mobile' ? 22 : (dev === 'tablet' ? 0.45 : 0.7) * 96
+        };
+      });
+    });
+  }
+  componentWillUnmount() { if (this._pnCleanup) this._pnCleanup(); }
+  renderVals() {
+    const p = this.props;
+    const theme = p.theme ?? 'branded';
+    const accent = theme === 'branded' ? (p.accentColor ?? '#1C2A57') : theme === 'monochrome' ? '#15171c' : '#52525b';
+    const ink = theme === 'grayscale' ? '#27272a' : '#1a1d23';
+    const density = p.density ?? 'standard';
+    const cellY = { compact: '5px', standard: '9px', comfortable: '14px' }[density];
+    const secMt = { compact: '22px', standard: '34px', comfortable: '48px' }[density];
+    const hl = p.headerLayout ?? 'logo-left';
+    const stC0 = '#15803d';
+    const stLabel = 'Paid in full';
+    const stC = theme === 'branded' ? stC0 : '#3f3f46';
+    const mix = (c, pc, base) => `color-mix(in srgb, ${c} ${pc}%, ${base || 'white'})`;
+    const fmt = n => n.toLocaleString('en-US', { style: 'currency', currency: 'CAD' });
+
+    // Invoices settled by this payment (statement ST-ACME-2026-07).
+    // ACME-20260503 is NOT included — never billed to the client.
+    const src = [
+      { ref: 'ACME-20260531', issued: 'May 31, 2026', amt: 6139.67 },
+      { ref: 'ACME-20260628', issued: 'Jun 28, 2026', amt: 6424.80 },
+      { ref: 'ACME-20260725', issued: 'Jul 25, 2026', amt: 12250.82 }
+    ];
+    const zebra = p.zebra ?? false;
+    let n = 0, total = 0;
+    const rows = src.map(it => {
+      n++; total += it.amt;
+      return { n, ref: it.ref, issued: it.issued, amount: fmt(it.amt),
+               settled: (it.settlement || 'full') === 'partial' ? 'Partial' : 'Paid in full',
+               bg: zebra && n % 2 === 0 ? '#f6f7f9' : 'transparent' };
+    });
+
+    const totalRows = [
+      { label: 'Total invoiced', value: fmt(total), cls: '' },
+      { label: 'PMT-ACME-20260803', value: '−' + fmt(total), cls: 'font-semibold' },
+      { label: 'Balance remaining', value: fmt(0), cls: '' }
+    ];
+
+    const dev = p.device ?? 'desktop';
+    return {
+      dev,
+      pageW: { desktop: '', tablet: '660px', mobile: '400px' }[dev] ?? '',
+      pageMargin: { desktop: '0.7in', tablet: '0.45in', mobile: '22px' }[dev] ?? '0.7in',
+      accent, ink, muted: '#6b7280', line: '#e5e7eb',
+      soft: mix(accent, 6), softBd: mix(accent, 22),
+      stLabel, stBg: mix(stC, 9), stBd: mix(stC, 30), stFg: mix(stC, 88, 'black'), stDot: stC,
+      cellY, secMt, dueColor: ink,
+      hlA: hl === 'logo-left', hlB: hl === 'centered', hlC: hl === 'company-left', hlD: hl === 'minimal',
+      docTitle: 'RECEIPT',
+      rcptNo: 'RCT-ACME-20260803',
+      dateLabel: 'Paid',
+      paidDate: 'Aug 3, 2026',
+      methodShort: 'Interac e-Transfer',
+      payMethod: 'Interac e-Transfer',
+      payInstrument: 'pay@example.com',
+      partyLabel: 'Received from',
+      heroLabel: 'Amount paid',
+      heroCap: 'Statement ST-ACME-2026-07 · 3 invoices settled',
+      rows,
+      totalRows: totalRows.map(r => { const t = (r.cls || '').includes('font-semibold'); return { ...r, bt: t ? 'border-t' : '', lblCls: t ? 'text-[10.5px] font-semibold uppercase tracking-[0.08em]' : 'font-normal', lblFg: t ? 'var(--ink)' : 'var(--mut)', valCls: t ? 'text-[13px] font-semibold' : 'text-[12.5px]' }; }),
+      balance: fmt(total),
+      balanceLabel: 'Total paid',
+      watermark: p.watermark ?? false,
+      wmText: 'Paid',
+      showNotes: p.showNotes ?? true,
+      notesText: 'Thank you for your business — we appreciate it. Payment was received in full by Interac e-Transfer on August 3rd, 2026; your account is paid in full and no further action is needed. Please keep this receipt as your proof of payment.',
+      showPayment: true
+    };
+  }
+}
+</script>
+</body>
+</html>

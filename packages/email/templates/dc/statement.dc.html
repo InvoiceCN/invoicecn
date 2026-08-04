@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="./doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+@media print{table{break-inside:auto}thead{break-inside:avoid}}
+.print-only{display:none}
+@media print{.print-only{display:block!important}.screen-only{display:none!important}}
+a{color:#1C2A57;text-decoration:none}a:hover{text-decoration:underline}
+[data-dev="tablet"] .r-stack{gap:24px!important}
+[data-dev="tablet"] .r-stack .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="tablet"] .r-stack .r-stack > div{text-align:left!important}
+[data-dev="tablet"] .r-full{max-width:100%!important}
+[data-dev="mobile"] .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="mobile"] .r-stack > div{text-align:left!important}
+[data-dev="mobile"] .r-stack .justify-end{justify-content:flex-start!important}
+[data-dev="mobile"] .r-stack .r-titlerow{flex-direction:row-reverse!important;justify-content:flex-end!important}
+[data-dev="mobile"] .r-full{width:100%!important;max-width:100%!important}
+[data-dev="mobile"] .r-wfull{width:100%!important;white-space:nowrap!important}
+[data-dev="mobile"] .r-hide{display:none!important}
+[data-dev="mobile"] .r-show{display:block!important}
+[data-dev="mobile"] .r-age{grid-template-columns:1fr 1fr!important}
+[data-dev="mobile"].r-stack{flex-direction:column!important;align-items:flex-start!important;gap:2px!important}
+[data-dev="mobile"] .r-stack.text-\[9px\]{gap:2px!important}
+[data-dev="tablet"].r-stack{gap:12px!important}
+</style>
+</helmet>
+<doc-page margin="{{ pageMargin }}" width="{{ pageW }}" data-comment-anchor="2c3cac8639-doc-page">
+<div class="relative font-sans text-[13px] leading-relaxed" data-dev="{{ dev }}" data-screen-label="Account statement" style="color:var(--ink);--accent:{{accent}};--ink:{{ink}};--mut:{{muted}};--ln:{{line}};--soft:{{soft}};--softbd:{{softBd}};--stbg:{{stBg}};--stbd:{{stBd}};--stfg:{{stFg}};--stdot:{{stDot}};--cy:{{cellY}};--smt:{{secMt}};--due:{{dueColor}}">
+<sc-if value="{{ watermark }}" hint-placeholder-val="{{ false }}">
+  <div class="pointer-events-none absolute inset-x-0 top-[240px] z-10 flex justify-center" style="opacity:0.07">
+    <div class="select-none text-[120px] font-black uppercase tracking-[0.18em]" style="color:var(--accent);transform:rotate(-16deg)">{{ wmText }}</div>
+  </div>
+</sc-if>
+<sc-if value="{{ hlA }}" hint-placeholder-val="{{ true }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div class="{{ logoWrapClass }}">
+      <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+      <div>
+        <div class="{{ vendorNameClass }}" style="color:var(--ink)">Example Studio</div>
+        <div class="{{ vendorAddrClass }}" style="color:var(--mut)">100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+      </div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">STATEMENT</div>
+      </div>
+      <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ acctNo }}</div>
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlB }}" hint-placeholder-val="{{ false }}">
+  <header class="flex flex-col items-center text-center">
+    <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+    <div class="mt-4 flex items-center gap-3">
+      <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">STATEMENT</div>
+      <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+    </div>
+    <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ acctNo }}</div>
+    <div class="mt-3 text-[11.5px]" style="color:var(--mut)">Example Studio · 100 Example Street, Laval, QC H7T-3B5 · billing@example.com</div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlC }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div>
+      <div class="text-[19px] font-semibold tracking-tight" style="color:var(--accent)">Example Studio</div>
+      <div class="mt-1.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Tradename for Idea Crafters LLC<br>100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">STATEMENT</div>
+      </div>
+      <div class="mt-1 font-mono text-[13px]" style="color:var(--ink)">{{ acctNo }}</div>
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlD }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-end justify-between border-b pb-4" style="border-color:var(--ln)">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">STATEMENT</div>
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+      </div>
+      <div class="mt-0.5 font-mono text-[12.5px]" style="color:var(--ink)">{{ acctNo }}</div>
+    </div>
+  </header>
+</sc-if>
+<section class="r-stack flex items-start justify-between gap-10" style="margin-top:var(--smt)">
+  <div class="r-stack flex gap-12">
+    <div class="max-w-[340px]">
+      <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Statement for</div>
+      <div class="mt-1.5 text-[13px] font-semibold" style="color:var(--ink)">Acme Corporation</div>
+      <div class="mt-0.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Attn: Alex Doe<br>405 avenue Ogilvy<br>Montréal, QC, H3N 1M3<br>finance@acme.example · +1 (555) 010-0200</div>
+    </div>
+    <sc-if value="{{ showContact }}" hint-placeholder-val="{{ false }}">
+      <div class="max-w-[230px]">
+        <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Account manager</div>
+        <div class="mt-1.5 text-[13px] font-semibold" style="color:var(--ink)">Dana Whitfield</div>
+        <div class="mt-0.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">billing@example.com<br>+1 (307) 555-0188</div>
+      </div>
+    </sc-if>
+  </div>
+  <div class="r-full w-[220px] flex-none rounded-lg border px-4 py-3" style="border-color:var(--ln)">
+    <div class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-[11px]">
+      <span style="color:var(--mut)">Statement</span><span class="text-right font-mono" style="color:var(--ink)">{{ stmtNo }}</span>
+      <span style="color:var(--mut)">Period</span><span class="text-right" style="color:var(--ink)">{{ period }}</span>
+
+
+
+      <span style="color:var(--mut)">Currency</span><span class="text-right" style="color:var(--ink)">CAD</span>
+      <span style="color:var(--mut)">Credit limit</span><span class="text-right tabular-nums" style="color:var(--ink)">$25,000.00</span>
+    </div>
+  </div>
+</section>
+<sc-if value="{{ showAging }}" hint-placeholder-val="{{ true }}">
+  <section style="margin-top:var(--smt);break-inside:avoid">
+    <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Balance by age</div>
+    <div class="r-age mt-2 grid grid-cols-5 overflow-hidden rounded-lg border" style="border-color:var(--ln)">
+      <sc-for list="{{ aging }}" as="a" hint-placeholder-count="5">
+        <div class="border-r px-3 py-2.5 last:border-r-0" style="border-color:var(--ln);background:{{ a.bg }}">
+          <div class="text-[10px] font-semibold uppercase tracking-[0.1em]" style="color:var(--mut)">{{ a.label }}</div>
+          <div class="mt-0.5 text-[13.5px] font-semibold tabular-nums" style="color:{{ a.fg }}">{{ a.value }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+<table class="w-full border-collapse" style="margin-top:var(--smt)">
+  <thead>
+    <tr class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">
+      <th class="w-16 text-left font-semibold" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:2px solid var(--accent)">Date</th>
+      <th class="r-hide w-32 text-left font-semibold whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Reference</th>
+      <th class="text-left font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Activity</th>
+      <th class="r-hide w-24 text-right font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Charges</th>
+      <th class="r-hide w-24 text-right font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Credits</th>
+      <th class="w-24 text-right font-semibold" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:2px solid var(--accent)">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="break-inside:avoid">
+      <td class="align-top text-[11.5px]" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:1px solid var(--ln);color:var(--mut)">{{ openDate }}</td>
+      <td class="r-hide align-top" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln)"></td>
+      <td class="align-top text-[12.5px] font-medium" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)" colspan="1">Balance brought forward</td>
+      <td class="r-hide align-top" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln)"></td>
+      <td class="r-hide align-top" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln)"></td>
+      <td class="align-top text-right text-[12.5px] font-medium tabular-nums" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ openingFmt }}</td>
+    </tr>
+    <sc-for list="{{ rows }}" as="row" hint-placeholder-count="6">
+      <sc-if value="{{ row.isSection }}" hint-placeholder-val="{{ false }}">
+        <tr style="break-inside:avoid"><td colspan="6" class="pt-5 pb-1 text-[10.5px] font-bold uppercase tracking-[0.12em]" style="color:var(--accent)">{{ row.desc }}</td></tr>
+      </sc-if>
+      <sc-if value="{{ row.isTxn }}" hint-placeholder-val="{{ true }}">
+        <tr style="background:{{ row.bg }};break-inside:avoid">
+          <td class="align-top text-[11.5px] tabular-nums" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:1px solid var(--ln);color:var(--mut)">{{ row.date }}</td>
+          <td class="r-hide align-top font-mono text-[11.5px] whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.ref }}</td>
+          <td class="align-top" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln)">
+            <div class="text-[12.5px] font-medium" style="color:var(--ink)">{{ row.type }}</div>
+            <div class="r-show hidden text-[11px] tabular-nums" style="color:var(--mut)"><span class="font-mono">{{ row.ref }}</span> · {{ row.mobileAmt }}</div>
+          </td>
+          <td class="r-hide align-top text-right text-[12.5px] tabular-nums" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.charge }}</td>
+          <td class="r-hide align-top text-right text-[12.5px] tabular-nums" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:{{ row.creditFg }}">{{ row.credit }}</td>
+          <td class="align-top text-right text-[12.5px] font-medium tabular-nums" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.bal }}</td>
+        </tr>
+      </sc-if>
+      <sc-if value="{{ row.isSubtotal }}" hint-placeholder-val="{{ false }}">
+        <tr style="break-inside:avoid">
+          <td colspan="3" style="padding:var(--cy) 8px var(--cy) 0"></td>
+          <td class="r-hide text-right text-[11px] font-medium whitespace-nowrap" style="padding:var(--cy) 8px;color:var(--mut)">{{ row.desc }}</td>
+          <td class="r-hide" style="padding:var(--cy) 8px"></td>
+          <td class="text-right text-[12.5px] font-semibold tabular-nums" style="padding:var(--cy) 0 var(--cy) 8px;color:var(--ink)">{{ row.amount }}</td>
+        </tr>
+      </sc-if>
+    </sc-for>
+  </tbody>
+</table>
+<section class="flex justify-end" style="margin-top:14px;break-inside:avoid">
+  <div class="r-full w-[320px]">
+    <sc-for list="{{ summaryRows }}" as="r" hint-placeholder-count="4">
+      <div class="flex items-baseline justify-between py-1.5 text-[12px] {{ r.bt }}" style="border-color:var(--ln)">
+        <span class="{{ r.lblCls }}" style="color:{{ r.lblFg }}">{{ r.label }}</span>
+        <span class="tabular-nums {{ r.valCls }}" style="color:var(--ink)">{{ r.value }}</span>
+      </div>
+    </sc-for>
+    <div class="mt-3 flex items-center justify-between rounded-md border px-4 py-2.5" style="background:var(--soft);border-color:var(--softbd)">
+      <span class="text-[11px] font-bold uppercase tracking-[0.1em]" style="color:var(--accent)">{{ balanceLabel }}</span>
+      <span class="text-[19px] font-semibold tabular-nums" style="color:var(--accent)">{{ balance }}</span>
+    </div>
+    <sc-if value="{{ showCad }}" hint-placeholder-val="{{ false }}">
+      <div class="mt-1.5 text-right text-[10.5px]" style="color:var(--mut)">≈ {{ cadBalance }} CAD · OANDA rate 1.3720, Jul 31, 2026</div>
+    </sc-if>
+  </div>
+</section>
+<sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+
+</sc-if>
+<sc-if value="{{ showTerms }}" hint-placeholder-val="{{ true }}">
+
+</sc-if>
+<sc-if value="{{ showRecon }}" hint-placeholder-val="{{ false }}">
+  <section class="r-stack flex gap-16" style="margin-top:calc(var(--smt) + 12px);break-inside:avoid">
+    <div class="r-full w-60"><div class="h-10 border-b" style="border-color:var(--ink)"></div><div class="mt-1.5 text-[10.5px]" style="color:var(--mut)">Reconciled by — Acme Corporation · Date</div></div>
+    <div class="r-full w-60"><div class="h-10 border-b" style="border-color:var(--ink)"></div><div class="mt-1.5 text-[10.5px]" style="color:var(--mut)">Queries / disputed items noted</div></div>
+  </section>
+</sc-if>
+<sc-if value="{{ showPayment }}" hint-placeholder-val="{{ true }}">
+  <section class="{{ paymentSectionCls }}" style="margin-top:var(--smt);break-inside:avoid">
+    <sc-if value="{{ payDivider }}" hint-placeholder-val="{{ true }}">
+      <div class="border-t" style="border-color:var(--ln)"></div>
+    </sc-if>
+    <div class="r-stack mt-4 flex items-start gap-8">
+      <sc-if value="{{ cryptoOnly }}" hint-placeholder-val="{{ false }}">
+        <div class="r-full grid flex-none content-start grid-cols-[100px,1fr] gap-x-4 gap-y-1 rounded-lg border p-4 text-[11.5px]" style="width:320px;border-color:var(--ln);background:var(--soft)">
+          <div class="col-span-2 mb-1 text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--accent)">Stablecoin (USDT)</div>
+          <span style="color:var(--mut)">Network</span><span style="color:var(--ink)">Ethereum (ERC-20)</span>
+          <span style="color:var(--mut)">Wallet</span><span class="break-all font-mono text-[10.5px]" style="color:var(--ink)">0x7Ae4F19c8B2d5C61aD3e0f84B9c72E5D1a6F3B08<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+          <span style="color:var(--mut)">Memo</span><span class="font-mono" style="color:var(--ink)">{{ stmtNo }}<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showBank }}" hint-placeholder-val="{{ true }}">
+        <div class="r-full grid flex-none content-start grid-cols-[100px,1fr] gap-x-4 gap-y-1 rounded-lg border p-4 text-[11.5px]" style="width:320px;border-color:var(--ln);background:var(--soft)">
+          <div class="col-span-2 mb-1 text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--accent)">Bank transfer</div>
+          <span style="color:var(--mut)">Bank</span><span style="color:var(--ink)">Royal Bank of Canada</span>
+          <span style="color:var(--mut)">Account name</span><span style="color:var(--ink)">BUILDINGO INC</span>
+          <span style="color:var(--mut)">Account no.</span><span class="font-mono" style="color:var(--ink)">1066349<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+          <span style="color:var(--mut)">Institution no.</span><span class="font-mono" style="color:var(--ink)">003<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+          <span style="color:var(--mut)">Transit no.</span><span class="font-mono" style="color:var(--ink)">02301<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+          <span style="color:var(--mut)">Reference</span><span class="font-mono" style="color:var(--ink)">{{ stmtNo }}<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+          <sc-if value="{{ cryptoInPanel }}" hint-placeholder-val="{{ false }}">
+            <div class="col-span-2 mt-2 border-t pt-2" style="border-color:var(--softbd)">
+              <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--accent)">Stablecoin (USDT)</div>
+              <div class="mt-1 grid grid-cols-[100px,1fr] gap-x-4 gap-y-1">
+                <span style="color:var(--mut)">Network</span><span style="color:var(--ink)">Ethereum (ERC-20)</span>
+                <span style="color:var(--mut)">Wallet</span><span class="break-all font-mono text-[10.5px]" style="color:var(--ink)">0x7Ae4F19c8B2d5C61aD3e0f84B9c72E5D1a6F3B08<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+                <span style="color:var(--mut)">Memo</span><span class="font-mono" style="color:var(--ink)">{{ stmtNo }}<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ qrLeft }}" hint-placeholder-val="{{ false }}">
+        <div class="flex flex-none flex-col items-start justify-center gap-1.5">
+          <div class="h-24 w-24 rounded" style="background:repeating-linear-gradient(45deg,var(--ln),var(--ln) 3px,transparent 3px,transparent 7px)"></div>
+          <div class="text-[10.5px] font-medium" style="color:var(--mut)">Scan to settle</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showPayCol }}" hint-placeholder-val="{{ true }}">
+        <div class="r-full ml-auto flex w-[190px] flex-none flex-col items-end justify-center gap-2 text-right">
+          <sc-if value="{{ qrRight }}" hint-placeholder-val="{{ false }}">
+            <div class="flex w-full flex-col items-end">
+              <div class="aspect-square w-1/2 rounded" style="background:repeating-linear-gradient(45deg,var(--ln),var(--ln) 3px,transparent 3px,transparent 7px)"></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showBtn }}" hint-placeholder-val="{{ true }}">
+            <a href="#" class="r-wfull screen-only inline-flex w-full items-center justify-center rounded-md px-4 py-2.5 text-[12.5px] font-semibold" style="background:var(--accent);color:#ffffff">Settle balance</a>
+          </sc-if>
+          <sc-if value="{{ showBtn }}" hint-placeholder-val="{{ true }}">
+            <div class="r-wfull text-[10.5px] leading-snug" style="color:var(--mut)">Card, ACH or wire at <span class="font-mono">example.com/pay/IP-2042<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span></div>
+          </sc-if>
+          <sc-if value="{{ showBtn }}" hint-placeholder-val="{{ true }}">
+            <div class="r-wfull text-[10.5px] leading-snug" style="color:var(--mut)">Interac e-Transfer to <span class="font-mono">pay@example.com<span class="screen-only" style="display:inline-block;margin-left:5px;vertical-align:-1px;opacity:0.45;cursor:pointer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h8"></path></svg></span></span></div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</sc-if>
+<sc-if value="{{ showSlip }}" hint-placeholder-val="{{ false }}">
+  <div class="r-stack flex items-center justify-between gap-1 text-[9px] tracking-wide" style="color:var(--mut);margin-top:var(--smt)" data-dev="{{ dev }}">
+    <span>Example Studio · GST 000000000RT0001 QST 0000000000TQ0001</span>
+    <span>example.com · billing@example.com · {{ stmtNo }}</span>
+  </div>
+  <section class="print-only" style="margin-top:calc(var(--smt) + 16px);break-inside:avoid">
+    <div class="border-t border-dashed pt-1.5 text-center text-[9.5px] uppercase tracking-[0.2em]" style="border-color:var(--mut);color:var(--mut)">Detach and return with payment</div>
+    <div class="mt-4 flex items-start justify-between gap-8">
+      <div class="text-[11.5px] leading-relaxed">
+        <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Remittance advice</div>
+        <div class="mt-1.5 font-semibold" style="color:var(--ink)">Example Studio</div>
+        <div style="color:var(--mut)">100 Example Street, Laval, QC H7T-3B5</div>
+        <div class="mt-2" style="color:var(--mut)">Statement <span class="font-mono" style="color:var(--ink)">{{ stmtNo }}</span> · Account <span class="font-mono" style="color:var(--ink)">IP-2042</span> · <span style="color:var(--ink)">Acme Corporation</span></div>
+      </div>
+      <div class="w-[230px] flex-none text-[11.5px]">
+        <div class="flex justify-between border-b py-1" style="border-color:var(--ln)"><span style="color:var(--mut)">Balance due</span><span class="font-semibold tabular-nums" style="color:var(--ink)">{{ balance }}</span></div>
+        <div class="mt-3 flex items-end justify-between py-1"><span style="color:var(--mut)">Amount enclosed</span><span class="inline-block h-5 w-24 border-b" style="border-color:var(--ink)"></span></div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+</div>
+<div slot="footer" class="r-stack {{ slotFooterHide }} flex items-center justify-between gap-1 font-sans text-[9px] tracking-wide" data-dev="{{ dev }}" style="color:#6b7280;padding-top:16px">
+  <span>Example Studio · GST 000000000RT0001 QST 0000000000TQ0001</span>
+  <span>example.com · billing@example.com · {{ stmtNo }}</span>
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;pageNumbers&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;bottom-right&quot;,&quot;bottom-center&quot;,&quot;bottom-left&quot;],&quot;default&quot;:&quot;bottom-right&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;pageNumberFormat&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;page-x-of-y&quot;,&quot;x-of-y&quot;,&quot;x-slash-y&quot;],&quot;default&quot;:&quot;page-x-of-y&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;paper&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a4&quot;,&quot;letter&quot;],&quot;default&quot;:&quot;a4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;default&quot;:&quot;desktop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;headerLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;logo-left&quot;,&quot;centered&quot;,&quot;company-left&quot;,&quot;minimal&quot;],&quot;default&quot;:&quot;logo-left&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;logoInline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;compact&quot;,&quot;standard&quot;,&quot;comfortable&quot;],&quot;default&quot;:&quot;compact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;zebra&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;branded&quot;,&quot;monochrome&quot;,&quot;grayscale&quot;],&quot;default&quot;:&quot;branded&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#1C2A57&quot;,&quot;#2F80E4&quot;,&quot;#0E7490&quot;,&quot;#B45309&quot;],&quot;default&quot;:&quot;#1C2A57&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;watermark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;status&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;draft&quot;,&quot;open&quot;,&quot;past-due&quot;,&quot;on-hold&quot;,&quot;settled&quot;],&quot;default&quot;:&quot;settled&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;showBank&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;acceptCrypto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showPayButton&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showQr&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;qrPosition&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;right-column&quot;,&quot;after-bank&quot;],&quot;default&quot;:&quot;right-column&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;paymentDivider&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showSlip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showAging&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showContact&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showTerms&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showReconciliation&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    import('./page-numbers.js').then(m => {
+      this._pnCleanup = m.attachPageNumbers(() => {
+        const dp = document.querySelector('doc-page');
+        const p = this.props;
+        const dev = p.device ?? 'desktop';
+        const fmtMap = { 'page-x-of-y': 'Page {n} of {N}', 'x-of-y': '{n} of {N}', 'x-slash-y': '{n} / {N}' };
+        return {
+          root: dp && dp.querySelector(':scope > div'),
+          footer: dp && dp.querySelector('[slot="footer"]'),
+          position: p.pageNumbers ?? 'bottom-right',
+          format: fmtMap[p.pageNumberFormat ?? 'page-x-of-y'] || fmtMap['page-x-of-y'],
+          paper: p.paper ?? 'a4',
+          marginPx: dev === 'mobile' ? 22 : (dev === 'tablet' ? 0.45 : 0.7) * 96
+        };
+      });
+    });
+  }
+  componentWillUnmount() { if (this._pnCleanup) this._pnCleanup(); }
+  renderVals() {
+    const p = this.props;
+    const theme = p.theme ?? 'branded';
+    const accent = theme === 'branded' ? (p.accentColor ?? '#1C2A57') : theme === 'monochrome' ? '#15171c' : '#52525b';
+    const ink = theme === 'grayscale' ? '#27272a' : '#1a1d23';
+    const density = p.density ?? 'standard';
+    const cellY = { compact: '5px', standard: '9px', comfortable: '14px' }[density];
+    const secMt = { compact: '22px', standard: '34px', comfortable: '48px' }[density];
+    const hl = p.headerLayout ?? 'logo-left';
+    const logoInline = p.logoInline ?? false;
+    const dev = p.device ?? 'desktop';
+    const status = p.status ?? 'settled';
+    const stMap = { open: ['Open', '#2563eb'], 'past-due': ['Past due', '#b91c1c'], 'on-hold': ['On hold', '#b45309'], settled: ['Settled', '#15803d'], draft: ['Draft', '#6b7280'] };
+    const [stLabel, stC0] = stMap[status] || stMap.open;
+    const stC = theme === 'branded' ? stC0 : '#3f3f46';
+    const mix = (c, pc, base) => `color-mix(in srgb, ${c} ${pc}%, ${base || 'white'})`;
+    const fmt = n => n.toLocaleString('en-US', { style: 'currency', currency: 'CAD' });
+    const long = p.longStatement ?? false;
+    const zebra = p.zebra ?? false;
+
+    const D = (date, ref, type, desc, charge, credit) => ({ t: 'd', date, ref, type, desc, charge: charge || 0, credit: credit || 0 });
+
+    // Acme invoice history. Payment received in full 2026-08-03 by
+    // Interac e-Transfer (receipt RCT-ACME-20260803). ACME-20260503 is excluded —
+    // prepared but never billed to the client.
+    const src = [
+      D('May 31', 'ACME-20260531', 'Monthly subscription invoice', '', 6139.67),
+      D('Jun 28', 'ACME-20260628', 'Monthly subscription invoice', '', 6424.80),
+      D('Jul 25', 'ACME-20260725', 'Monthly subscription invoice', '', 12250.82),
+      D('Aug 3', 'RCT-ACME-20260803', 'Payment received — Interac e-Transfer', '', 0, 24815.29)
+    ];
+    const opening = 0;
+    const openDate = 'May 1';
+
+    let bal = opening, netCharges = 0, credits = 0, payments = 0, zi = 0;
+    const rows = [];
+    for (const it of src) {
+      zi++;
+      netCharges += it.charge;
+      if (it.credit) { if (it.type === 'Credit note') credits += it.credit; else payments += it.credit; }
+      bal += it.charge - it.credit;
+      rows.push({
+        isTxn: true, date: it.date, ref: it.ref, type: it.type, desc: it.desc,
+        charge: it.charge ? fmt(it.charge) : '—',
+        credit: it.credit ? '−' + fmt(it.credit) : '—',
+        creditFg: it.credit ? '#15803d' : ink,
+        bal: fmt(bal),
+        mobileAmt: it.charge ? 'Charge ' + fmt(it.charge) : 'Credit −' + fmt(it.credit),
+        bg: zebra && zi % 2 === 0 ? '#f6f7f9' : 'transparent'
+      });
+    }
+
+    const closing = status === 'settled' ? 0 : bal;
+    const summaryRows = [
+      { label: 'Opening balance', value: fmt(opening), cls: '' },
+      { label: 'Invoiced this period', value: fmt(netCharges), cls: '' },
+      { label: 'Closing balance', value: fmt(closing), cls: 'font-semibold' }
+    ];
+
+    // As at Jul 31: ACME-20260531 (due Jun 15) is 46 days overdue, ACME-20260628 (due Jul 13) is 18 days
+    // overdue, ACME-20260725 (due Aug 9) is not yet due.
+    const buckets = status === 'settled' ? [0, 0, 0, 0, 0] : [12250.82, 6424.80, 6139.67, 0, 0];
+    const aging = ['Current', '1–30 days', '31–60 days', '61–90 days', '90+ days'].map((label, i) => ({
+      label,
+      value: fmt(buckets[i]),
+      bg: buckets[i] > 0 && i > 0 ? mix('#b91c1c', 7) : 'transparent',
+      fg: buckets[i] > 0 && i > 0 ? '#b91c1c' : buckets[i] > 0 ? ink : '#9ca3af'
+    }));
+
+    const notes = {
+      open: 'This statement covers all activity posted to account IP-2042 for the period May 31 – July 31, 2026.',
+      'past-due': 'Invoices ACME-20260531 and ACME-20260628 are past due — please arrange payment of the outstanding balance. Invoice ACME-20260725 is not yet due (Aug 9, 2026).',
+      'on-hold': 'Collection on this account is on hold pending reconciliation. Disputed items remain on the statement until resolved.',
+      settled: 'All invoices on this account are settled. Payment of 24 815,29 $ CA received in full on August 3, 2026 by Interac e-Transfer (receipt RCT-ACME-20260803). Thank you — this statement is provided for your records only.',
+      draft: 'Draft statement for internal review. Figures are provisional until the period is closed.'
+    };
+
+    return {
+      dev,
+      pageW: { desktop: '', tablet: '660px', mobile: '400px' }[dev] ?? '',
+      pageMargin: { desktop: '0.7in', tablet: '0.45in', mobile: '22px' }[dev] ?? '0.7in',
+      accent, ink, muted: '#6b7280', line: '#e5e7eb',
+      soft: mix(accent, 6), softBd: mix(accent, 22),
+      stLabel, stBg: mix(stC, 9), stBd: mix(stC, 30), stFg: mix(stC, 88, 'black'), stDot: stC,
+      cellY, secMt,
+      hlA: hl === 'logo-left', hlB: hl === 'centered', hlC: hl === 'company-left', hlD: hl === 'minimal',
+      logoWrapClass: logoInline ? 'flex items-center gap-4' : '',
+      vendorNameClass: logoInline ? 'text-[15px] font-semibold' : 'mt-4 text-[15px] font-semibold',
+      vendorAddrClass: logoInline ? 'text-[11.5px] leading-relaxed' : 'mt-1 text-[11.5px] leading-relaxed',
+      stmtNo: 'ST-ACME-2026-08',
+      acctNo: 'Account no. IP-2042',
+      period: '05/2026 - 08/2026',
+      dueDate: 'June 15, 2026',
+      dueNote: status === 'past-due' ? ' — past due' : '',
+      dueColor: status === 'past-due' ? '#b91c1c' : ink,
+      openDate, openingFmt: fmt(opening),
+      rows, aging,
+      summaryRows: summaryRows.map(r => { const t = (r.cls || '').includes('font-semibold'); return { ...r, bt: t ? 'border-t' : '', lblCls: t ? 'text-[10.5px] font-semibold uppercase tracking-[0.08em]' : 'font-normal', lblFg: t ? 'var(--ink)' : 'var(--mut)', valCls: t ? 'text-[13px] font-semibold' : 'text-[12.5px]' }; }),
+      showAging: p.showAging ?? true,
+      balance: fmt(closing),
+      balanceLabel: status === 'settled' ? 'No balance owing' : 'Balance due',
+      showCad: (p.currency ?? 'usd') === 'usd-cad',
+      cadBalance: (closing * 1.372).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      watermark: p.watermark ?? false,
+      wmText: { draft: 'Draft', settled: 'Settled', 'past-due': 'Overdue', 'on-hold': 'On hold' }[status] || 'Copy',
+      showContact: p.showContact ?? false,
+      showNotes: p.showNotes ?? true,
+      notesText: notes[status] || notes.open,
+      showTerms: p.showTerms ?? true,
+      showRecon: p.showReconciliation ?? false,
+      showBank: p.showBank ?? true,
+      cryptoInPanel: (p.acceptCrypto ?? false) && (p.showBank ?? true),
+      cryptoOnly: (p.acceptCrypto ?? false) && !(p.showBank ?? true),
+      showBtn: p.showPayButton ?? true,
+      qrRight: (p.showQr ?? false) && (p.qrPosition ?? 'right-column') === 'right-column',
+      qrLeft: (p.showQr ?? false) && (p.qrPosition ?? 'right-column') === 'after-bank',
+      payDivider: p.paymentDivider ?? true,
+      showPayCol: (p.showPayButton ?? true) || ((p.showQr ?? false) && (p.qrPosition ?? 'right-column') === 'right-column'),
+      showSlip: false,
+      paymentSectionCls: (p.showSlip ?? false) ? 'screen-only' : '',
+      slotFooterHide: (p.showSlip ?? false) ? 'hidden' : '',
+      showPayment: false
+    };
+  }
+}
+</script>
+</body>
+</html>

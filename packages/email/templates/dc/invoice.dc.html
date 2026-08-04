@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="./doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+@media print{table{break-inside:auto}thead{break-inside:avoid}}
+.print-only{display:none}
+@media print{.print-only{display:block}.screen-only{display:none}}
+a{color:#1C2A57;text-decoration:none}a:hover{text-decoration:underline}
+[data-dev="tablet"] .r-stack{gap:24px!important}
+[data-dev="tablet"] .r-stack .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="tablet"] .r-stack .r-stack > div{text-align:left!important}
+[data-dev="tablet"] .r-full{max-width:100%!important}
+[data-dev="mobile"] .r-stack{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+[data-dev="mobile"] .r-stack > div{text-align:left!important}
+[data-dev="mobile"] .r-stack .justify-end{justify-content:flex-start!important}
+[data-dev="mobile"] .r-stack .r-titlerow{flex-direction:row-reverse!important;justify-content:flex-end!important}
+[data-dev="mobile"] .r-full{width:100%!important;max-width:100%!important}
+[data-dev="mobile"] .r-wfull{width:100%!important;white-space:nowrap!important}
+[data-dev="mobile"] .r-hide{display:none!important}
+[data-dev="mobile"] .r-show{display:block!important}
+[data-dev="mobile"].r-stack{flex-direction:column!important;align-items:flex-start!important;gap:2px!important}
+[data-dev="mobile"] .r-stack.text-\[9px\]{gap:2px!important}
+[data-dev="tablet"].r-stack{gap:12px!important}
+</style>
+</helmet>
+<doc-page margin="{{ pageMargin }}" width="{{ pageW }}">
+<div class="relative font-sans text-[13px] leading-relaxed" data-dev="{{ dev }}" data-screen-label="Invoice" style="color:var(--ink);--accent:{{accent}};--ink:{{ink}};--mut:{{muted}};--ln:{{line}};--soft:{{soft}};--softbd:{{softBd}};--stbg:{{stBg}};--stbd:{{stBd}};--stfg:{{stFg}};--stdot:{{stDot}};--cy:{{cellY}};--smt:{{secMt}};--due:{{dueColor}}">
+<sc-if value="{{ watermark }}" hint-placeholder-val="{{ false }}">
+  <div class="pointer-events-none absolute inset-x-0 top-[240px] z-10 flex justify-center" style="opacity:0.07">
+    <div class="select-none text-[120px] font-black uppercase tracking-[0.18em]" style="color:var(--accent);transform:rotate(-16deg)">{{ wmText }}</div>
+  </div>
+</sc-if>
+<sc-if value="{{ hlA }}" hint-placeholder-val="{{ true }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div class="{{ logoWrapClass }}">
+      <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+      <div>
+        <div class="{{ vendorNameClass }}" style="color:var(--ink)">Example Studio</div>
+        <div class="{{ vendorAddrClass }}" style="color:var(--mut)">100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+      </div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">INVOICE</div>
+      </div>
+
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlB }}" hint-placeholder-val="{{ false }}">
+  <header class="flex flex-col items-center text-center">
+    <img src="./logo.png" alt="Example Studio" class="h-14 w-auto">
+    <div class="mt-4 flex items-center gap-3">
+      <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">INVOICE</div>
+      <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+    </div>
+
+    <div class="mt-3 text-[11.5px]" style="color:var(--mut)">Example Studio · 100 Example Street, Laval, QC H7T-3B5 · billing@example.com</div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlC }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-start justify-between gap-10">
+    <div>
+      <div class="text-[19px] font-semibold tracking-tight" style="color:var(--accent)">Example Studio</div>
+      <div class="mt-1.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Tradename for Idea Crafters LLC<br>100 Example Street<br>Laval, Québec, H7T-3B5, Canada<br>billing@example.com · +1 (555) 010-0100</div>
+    </div>
+    <div class="text-right">
+      <div class="r-titlerow flex items-center justify-end gap-3">
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">INVOICE</div>
+      </div>
+
+    </div>
+  </header>
+</sc-if>
+<sc-if value="{{ hlD }}" hint-placeholder-val="{{ false }}">
+  <header class="r-stack flex items-end justify-between border-b pb-4" style="border-color:var(--ln)">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="text-[24px] font-semibold tracking-[0.08em]" style="color:var(--accent)">INVOICE</div>
+        <span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-wide" style="background:var(--stbg);border-color:var(--stbd);color:var(--stfg)"><span class="inline-block h-1.5 w-1.5 rounded-full" style="background:var(--stdot)"></span>{{ stLabel }}</span>
+      </div>
+    </div>
+  </header>
+</sc-if>
+<section class="r-stack flex items-start justify-between gap-10" style="margin-top:var(--smt)">
+  <div class="r-stack flex gap-12">
+    <div class="max-w-[340px]">
+      <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Bill to</div>
+      <div class="mt-1.5 text-[13px] font-semibold" style="color:var(--ink)">Acme Corporation</div>
+      <div class="mt-0.5 text-[11.5px] leading-relaxed" style="color:var(--mut)">Attn: Alex Doe<br>405 avenue Ogilvy<br>Montréal, QC, H3N 1M3<br>finance@acme.example · +1 (555) 010-0200</div>
+    </div>
+  </div>
+  <div class="r-full w-[220px] flex-none rounded-lg border px-4 py-3" style="border-color:var(--ln)">
+    <div class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-1 text-[11px]">
+      <span style="color:var(--mut)">Invoice #</span><span class="text-right font-mono" style="color:var(--ink)">ACME-20260503</span>
+      <span style="color:var(--mut)">Issued</span><span class="text-right" style="color:var(--ink)">May 4, 2026</span>
+      <span style="color:var(--mut)">Due</span><span class="text-right" style="color:var(--ink)">May 4, 2026</span>
+      <span style="color:var(--mut)">Terms</span><span class="text-right" style="color:var(--ink)">Net 0</span>
+      <span style="color:var(--mut)">Currency</span><span class="text-right" style="color:var(--ink)">CAD</span>
+    </div>
+  </div>
+</section>
+<table class="w-full border-collapse" style="margin-top:var(--smt)">
+  <thead>
+    <tr class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">
+      <th class="text-left font-semibold" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:2px solid var(--accent)">Description</th>
+      <th class="r-hide w-8 text-right font-semibold" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Qty</th>
+      <th class="r-hide w-28 text-right font-semibold whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Rate</th>
+      <th class="r-hide w-20 text-right font-semibold whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:2px solid var(--accent)">Discount</th>
+      <th class="w-28 text-right font-semibold" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:2px solid var(--accent)">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <sc-for list="{{ rows }}" as="row" hint-placeholder-count="1">
+      <tr style="break-inside:avoid">
+        <td class="align-top" style="padding:var(--cy) 8px var(--cy) 0;border-bottom:1px solid var(--ln)">
+          <div class="text-[12.5px] font-medium" style="color:var(--ink)">{{ row.desc }}</div>
+          <div class="text-[11px]" style="color:var(--mut)">{{ row.detail }}</div>
+          <div class="text-[11px]" style="color:var(--mut)">{{ row.detail2 }}</div>
+          <div class="r-show hidden text-[11px] tabular-nums" style="color:var(--mut)">{{ row.qty }} × {{ row.rate }}{{ row.discountNote }}</div>
+        </td>
+        <td class="r-hide align-top text-right text-[12.5px] tabular-nums" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.qty }}</td>
+        <td class="r-hide align-top text-right text-[12.5px] tabular-nums whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.rate }}</td>
+        <td class="r-hide align-top text-right text-[12.5px] tabular-nums whitespace-nowrap" style="padding:var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--mut)">{{ row.discount }}</td>
+        <td class="align-top text-right text-[12.5px] font-medium tabular-nums" style="padding:var(--cy) 0 var(--cy) 8px;border-bottom:1px solid var(--ln);color:var(--ink)">{{ row.amount }}</td>
+      </tr>
+    </sc-for>
+  </tbody>
+</table>
+<section class="flex justify-end" style="margin-top:14px;break-inside:avoid">
+  <div class="r-full w-[320px]">
+    <sc-for list="{{ totalRows }}" as="r" hint-placeholder-count="4">
+      <div class="flex items-baseline justify-between py-1.5 text-[12px] {{ r.bt }}" style="border-color:var(--ln)">
+        <span class="{{ r.lblCls }}" style="color:{{ r.lblFg }}">{{ r.label }}</span>
+        <span class="tabular-nums {{ r.valCls }}" style="color:var(--ink)">{{ r.value }}</span>
+      </div>
+    </sc-for>
+    <div class="mt-3 flex items-center justify-between rounded-md border px-4 py-2.5" style="background:var(--soft);border-color:var(--softbd)">
+      <span class="text-[11px] font-bold uppercase tracking-[0.1em]" style="color:var(--accent)">{{ balanceLabel }}</span>
+      <span class="text-[19px] font-semibold tabular-nums" style="color:var(--accent)">{{ balance }}</span>
+    </div>
+    <div class="mt-1.5 text-center text-[10.5px]" style="color:var(--mut)">Exchange rate from Bank of Canada on May 4, 2026. CAD 1.3611.</div>
+  </div>
+</section>
+<sc-if value="{{ showSign }}" hint-placeholder-val="{{ false }}">
+  <section class="r-stack flex gap-16" style="margin-top:calc(var(--smt) + 12px);break-inside:avoid">
+    <div class="r-full w-60"><div class="h-10 border-b" style="border-color:var(--ink)"></div><div class="mt-1.5 text-[10.5px]" style="color:var(--mut)">Authorized — Example Studio</div></div>
+    <div class="r-full w-60"><div class="h-10 border-b" style="border-color:var(--ink)"></div><div class="mt-1.5 text-[10.5px]" style="color:var(--mut)">Client acceptance — Acme Corporation · Date</div></div>
+  </section>
+</sc-if>
+<sc-if value="{{ showPayment }}" hint-placeholder-val="{{ true }}">
+  <section style="margin-top:var(--smt);break-inside:avoid">
+    <sc-if value="{{ payDivider }}" hint-placeholder-val="{{ true }}">
+      <div class="border-t" style="border-color:var(--ln)"></div>
+    </sc-if>
+    <div class="mt-4 flex items-start justify-between gap-10">
+      <div class="grid flex-none content-start grid-cols-[130px,1fr] gap-x-4 gap-y-1.5 rounded-lg border p-4 text-[11.5px]" style="width:340px;border-color:var(--ln);background:var(--soft)" data-comment-anchor="381749aa10-div">
+        <div class="col-span-2 mb-1 text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--accent)">Bank transfer</div>
+        <span style="color:var(--mut)">Bank</span><span style="color:var(--ink)" data-comment-anchor="f41ff410ee-span">Royal Bank of Canada</span>
+        <span style="color:var(--mut)">Account name</span><span style="color:var(--ink)" data-comment-anchor="480d92c466-span">BUILDINGO INC</span>
+        <span style="color:var(--mut)">Institution no.</span><span class="font-mono" style="color:var(--ink)" data-comment-anchor="13b5793f9c-span">003</span>
+        <span style="color:var(--mut)">Transit no.</span><span class="font-mono" style="color:var(--ink)" data-comment-anchor="e338a0f924-span">02301</span>
+        <span style="color:var(--mut)">Account no.</span><span class="font-mono" style="color:var(--ink)" data-comment-anchor="211b405714-span">1066349</span>
+        <span style="color:var(--mut)">Reference</span><span class="font-mono" style="color:var(--ink)">ACME-20260503</span>
+        <div class="col-span-2 mt-1.5 border-t pt-1.5" style="border-color:var(--softbd)"></div>
+        <span style="color:var(--mut)">Interac e-Transfer</span><span class="font-mono" style="color:var(--ink)">pay@example.com</span>
+      </div>
+      <sc-if value="{{ showNotesOrTerms }}" hint-placeholder-val="{{ true }}">
+        <div class="flex-1">
+          <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+            <div class="mb-4">
+              <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Notes</div>
+              <p class="mt-1.5 text-[12px] leading-relaxed" style="color:var(--ink)">Thank you for your business. This invoice covers the Example Studio yearly plan monthly cycle (4 weeks) for the period May 3 to May 30, 2026. The fee is quoted at $4,000.00 USD and billed in CAD at the Bank of Canada rate of 1.3611 (May 4, 2026).</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showTerms }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Terms &amp; conditions</div>
+              <p class="mt-1.5 text-[11px] leading-relaxed" style="color:var(--mut)">Payment is due on receipt (net 0). Overdue balances accrue interest at 1.5% per month. Deliverables remain the property of Example Studio until paid in full; upon full payment all rights transfer to the client as set out in the services agreement.</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+</sc-if>
+<sc-if value="{{ showSlip }}" hint-placeholder-val="{{ false }}">
+  <div class="r-stack flex items-center justify-between gap-1 text-[9px] tracking-wide" style="color:var(--mut);margin-top:var(--smt)">
+    <span>Example Studio · GST 000000000RT0001 QST 0000000000TQ0001</span>
+    <span>example.com · billing@example.com · ACME-20260503</span>
+  </div>
+  <section class="print-only" style="margin-top:calc(var(--smt) + 16px);break-inside:avoid" data-comment-anchor="a5065f3bad-section">
+    <div class="border-t border-dashed pt-1.5 text-center text-[9.5px] uppercase tracking-[0.2em]" style="border-color:var(--mut);color:var(--mut)">Detach and return with payment</div>
+    <div class="mt-4 flex items-start justify-between gap-8" data-comment-anchor="16c1484c28-div">
+      <div class="text-[11.5px] leading-relaxed">
+        <div class="text-[10px] font-semibold uppercase tracking-[0.12em]" style="color:var(--mut)">Remittance advice</div>
+        <div class="mt-1.5 font-semibold" style="color:var(--ink)">Example Studio</div>
+        <div style="color:var(--mut)">100 Example Street, Laval, QC H7T-3B5</div>
+        <div class="mt-2" style="color:var(--mut)">Invoice <span class="font-mono" style="color:var(--ink)">ACME-20260503</span> · Customer <span style="color:var(--ink)">Acme Corporation</span></div>
+      </div>
+      <div class="w-[230px] flex-none text-[11.5px]">
+        <div class="flex justify-between border-b py-1" style="border-color:var(--ln)"><span style="color:var(--mut)">Balance due</span><span class="font-semibold tabular-nums" style="color:var(--ink)">{{ balance }}</span></div>
+        <div class="mt-3 flex items-end justify-between py-1"><span style="color:var(--mut)">Amount enclosed</span><span class="inline-block h-5 w-24 border-b" style="border-color:var(--ink)"></span></div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+</div>
+<div slot="footer" class="r-stack {{ slotFooterHide }} flex items-center justify-between gap-1 font-sans text-[9px] tracking-wide" data-dev="{{ dev }}" style="color:#6b7280;padding-top:16px">
+  <span>Example Studio · GST 000000000RT0001 QST 0000000000TQ0001</span>
+  <span>example.com · billing@example.com · ACME-20260503</span>
+</div>
+</doc-page>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;pageNumbers&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;bottom-right&quot;,&quot;bottom-center&quot;,&quot;bottom-left&quot;],&quot;default&quot;:&quot;bottom-right&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;pageNumberFormat&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;page-x-of-y&quot;,&quot;x-of-y&quot;,&quot;x-slash-y&quot;],&quot;default&quot;:&quot;page-x-of-y&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;paper&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a4&quot;,&quot;letter&quot;],&quot;default&quot;:&quot;a4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page numbers&quot;},&quot;device&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;default&quot;:&quot;desktop&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;headerLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;logo-left&quot;,&quot;centered&quot;,&quot;company-left&quot;,&quot;minimal&quot;],&quot;default&quot;:&quot;logo-left&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;logoInline&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;compact&quot;,&quot;standard&quot;,&quot;comfortable&quot;],&quot;default&quot;:&quot;compact&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;branded&quot;,&quot;monochrome&quot;,&quot;grayscale&quot;],&quot;default&quot;:&quot;branded&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#1C2A57&quot;,&quot;#2F80E4&quot;,&quot;#0E7490&quot;,&quot;#B45309&quot;],&quot;default&quot;:&quot;#1C2A57&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;watermark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;status&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;draft&quot;,&quot;sent&quot;,&quot;paid&quot;,&quot;partially-paid&quot;,&quot;overdue&quot;,&quot;cancelled&quot;],&quot;default&quot;:&quot;sent&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;paymentDivider&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showSlip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Payment&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showTerms&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;},&quot;showSignature&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    import('./page-numbers.js').then(m => {
+      this._pnCleanup = m.attachPageNumbers(() => {
+        const dp = document.querySelector('doc-page');
+        const p = this.props;
+        const dev = p.device ?? 'desktop';
+        const fmtMap = { 'page-x-of-y': 'Page {n} of {N}', 'x-of-y': '{n} of {N}', 'x-slash-y': '{n} / {N}' };
+        return {
+          root: dp && dp.querySelector(':scope > div'),
+          footer: dp && dp.querySelector('[slot="footer"]'),
+          position: p.pageNumbers ?? 'bottom-right',
+          format: fmtMap[p.pageNumberFormat ?? 'page-x-of-y'] || fmtMap['page-x-of-y'],
+          paper: p.paper ?? 'a4',
+          marginPx: dev === 'mobile' ? 22 : (dev === 'tablet' ? 0.45 : 0.7) * 96
+        };
+      });
+    });
+  }
+  componentWillUnmount() { if (this._pnCleanup) this._pnCleanup(); }
+  renderVals() {
+    const p = this.props;
+    const theme = p.theme ?? 'branded';
+    const accent = theme === 'branded' ? (p.accentColor ?? '#1C2A57') : theme === 'monochrome' ? '#15171c' : '#52525b';
+    const ink = theme === 'grayscale' ? '#27272a' : '#1a1d23';
+    const density = p.density ?? 'standard';
+    const cellY = { compact: '5px', standard: '9px', comfortable: '14px' }[density];
+    const secMt = { compact: '22px', standard: '34px', comfortable: '48px' }[density];
+    const hl = p.headerLayout ?? 'logo-left';
+    const logoInline = p.logoInline ?? false;
+    const status = p.status ?? 'sent';
+    const stMap = { draft: ['Draft', '#6b7280'], sent: ['Sent', '#2563eb'], paid: ['Paid', '#15803d'], 'partially-paid': ['Partially paid', '#b45309'], overdue: ['Overdue', '#b91c1c'], cancelled: ['Cancelled', '#52525b'] };
+    const [stLabel, stC0] = stMap[status] || stMap.sent;
+    const stC = theme === 'branded' ? stC0 : '#3f3f46';
+    const mix = (c, pc, base) => `color-mix(in srgb, ${c} ${pc}%, ${base || 'white'})`;
+    const fmt = n => n.toLocaleString('en-US', { style: 'currency', currency: 'CAD' });
+
+    const fx = 1.3611, usdRate = 4000;
+    const cadAmount = Math.round(usdRate * fx * 100) / 100;
+    const rows = [{
+      n: 1,
+      desc: 'Example Studio yearly plan — monthly cycle (May 3 → May 30)',
+      detail: '',
+      detail2: '',
+      qty: 1,
+      rate: '$4,000.00 USD',
+      discount: '—',
+      discountNote: '',
+      amount: fmt(cadAmount)
+    }];
+    const sub = cadAmount;
+    const disc = 0;
+    const taxable = sub - disc;
+    const gst = Math.round(taxable * 0.05 * 100) / 100;
+    const qst = Math.round(taxable * 0.09975 * 100) / 100;
+    const total = taxable + gst + qst;
+    const totalRows = [
+      { label: 'Subtotal', value: fmt(sub) },
+      { label: 'GST (5%)', value: fmt(gst) },
+      { label: 'QST (9.975%)', value: fmt(qst) },
+      { label: 'Total', value: fmt(total), cls: 'font-semibold' }
+    ];
+    const paid = status === 'paid' ? total : status === 'partially-paid' ? Math.round(total * 0.4 * 100) / 100 : 0;
+    const balance = total - paid;
+    if (paid > 0) totalRows.push({ label: 'Payment received', value: '−' + fmt(paid) });
+    const wmText = { draft: 'Draft', paid: 'Paid', cancelled: 'Void', overdue: 'Overdue' }[status] || 'Copy';
+    const dev = p.device ?? 'desktop';
+    return {
+      dev,
+      pageW: { desktop: '', tablet: '660px', mobile: '400px' }[dev] ?? '',
+      pageMargin: { desktop: '0.7in', tablet: '0.45in', mobile: '22px' }[dev] ?? '0.7in',
+      accent, ink, muted: '#6b7280', line: '#e5e7eb',
+      soft: mix(accent, 6), softBd: mix(accent, 22),
+      stLabel, stBg: mix(stC, 9), stBd: mix(stC, 30), stFg: mix(stC, 88, 'black'), stDot: stC,
+      cellY, secMt,
+      hlA: hl === 'logo-left', hlB: hl === 'centered', hlC: hl === 'company-left', hlD: hl === 'minimal',
+      logoWrapClass: logoInline ? 'flex items-center gap-4' : '',
+      vendorNameClass: logoInline ? 'text-[15px] font-semibold' : 'mt-4 text-[15px] font-semibold',
+      vendorAddrClass: logoInline ? 'text-[11.5px] leading-relaxed' : 'mt-1 text-[11.5px] leading-relaxed',
+      rows,
+      totalRows: totalRows.map(r => { const t = (r.cls || '').includes('font-semibold'); return { ...r, bt: t ? 'border-t' : '', lblCls: t ? 'text-[10.5px] font-semibold uppercase tracking-[0.08em]' : 'font-normal', lblFg: t ? 'var(--ink)' : 'var(--mut)', valCls: t ? 'text-[13px] font-semibold' : 'text-[12.5px]' }; }),
+      balance: fmt(balance),
+      balanceLabel: status === 'paid' ? 'Paid in full' : 'Balance due',
+      watermark: p.watermark ?? false, wmText,
+      dueColor: status === 'overdue' ? '#b91c1c' : ink,
+      dueNote: status === 'overdue' ? ' — past due' : '',
+      showNotes: p.showNotes ?? true,
+      showTerms: p.showTerms ?? true,
+      showNotesOrTerms: (p.showNotes ?? true) || (p.showTerms ?? true),
+      showSign: p.showSignature ?? false,
+      showBank: true,
+      payDivider: p.paymentDivider ?? true,
+      showSlip: p.showSlip ?? false,
+      slotFooterHide: (p.showSlip ?? false) ? 'hidden' : '',
+      showPayment: true
+    };
+  }
+}
+
+</script>
+</body>
+</html>
